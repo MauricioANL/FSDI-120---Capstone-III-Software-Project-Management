@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mi Proyecto Django{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/newPic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/logout.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+
+</head>
+<body>
+    <!-- Encabezado común para todas las páginas -->
+    <header>
+        <h1>Bienvenido a Mi Galery</h1>
+        <nav>
+            <!-- <a href="/">Inicio</a> | -->
+            
+            {% if user.is_authenticated %}
+                
+                <a href="{% url 'home' %}">Inicio</a> 
+                <a href="{% url 'newPicture' %}">New Photo</a> 
+                <form action="{% url 'logout' %}" method="post" class="logout-form">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn">Cerrar sesión</button>
+                </form>
+                <!-- Enlace de logout -->
+            {% else %}
+            <a href="{% url 'login' %}">Iniciar sesión</a>
+            <a href="{% url 'register' %}">Registrarse</a>
+            
+            {% endif %}
+        </nav>
+    </header>
+
+    <!-- El contenido específico de cada página será insertado aquí -->
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">  <!-- modal-lg para hacerlo más ancho -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Image</h5>
+                    <!-- Aquí se usa el span para el cierre -->
+                    <span class="close" data-bs-dismiss="modal" aria-label="Close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div id="modal-form-content">
+                        <!-- Aquí se carga el formulario dinámicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pie de página común para todas las páginas -->
+    <footer>
+        <p>© 2025 Mi Galery</p>
+    </footer>
+    <!-- Bootstrap Bundle con Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/home.js' %}"></script>
+</body>
+</html>

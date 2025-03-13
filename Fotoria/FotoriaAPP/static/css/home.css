@@ -1,0 +1,108 @@
+/* Contenedor principal */
+ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+li {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* 🔹 NECESARIO para posicionar el ícono */
+}
+
+li:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+h3 {
+    margin: 10px 0 5px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+p {
+    font-size: 0.9em;
+    color: #666;
+}
+
+p:first-of-type {
+    font-weight: bold;
+}
+
+p:last-of-type {
+    font-style: italic;
+    color: #555;
+}
+
+@media (max-width: 600px) {
+    ul {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 60%;  /* 🔹 Antes estaba en 400px, ahora es un % para hacerlo responsivo */
+    max-width: 800px; /* 🔹 Limita el tamaño máximo */
+    text-align: center;
+}
+
+.close {
+    color: red;
+    float: right;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Ícono de edición */
+.edit-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    color: #007bff;
+    background: white;
+    padding: 5px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: none; /* Oculto por defecto */
+    cursor: pointer;
+}
+
+li:hover .edit-icon {
+    display: block; /* Se muestra solo cuando el usuario pasa el mouse */
+}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Página de Inicio{% endblock %}
+
+{% block content %}
+
+    <ul>
+        {% for picture in listPicture %}
+        <li>
+            <img src="{{ picture.img.url }}" alt="{{ picture.name }}">
+            <h3>{{ picture.name }}</h3>
+            <p>{{ picture.descripcion }}</p>
+            <p>Fecha: {{ picture.date }}</p>
+            <p>Ubicación: {{ picture.location }}</p>
+
+            <a href="#" class="edit-icon position-absolute top-0 end-0 p-2" data-id="{{ picture.id }}" data-bs-toggle="modal" data-bs-target="#editModal">
+                <i class="fas fa-edit text-primary fs-4"></i>
+            </a>
+            <!-- <a href="#" class="edit-icon" data-id="{{ picture.id }}">
+                <i class="fas fa-edit"></i>
+            </a> -->
+        </li>
+    {% empty %}
+        <p>No hay photos disponibles.</p>
+    {% endfor %}
+    </ul>
+{% endblock %}
